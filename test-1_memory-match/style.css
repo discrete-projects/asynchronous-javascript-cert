@@ -1,0 +1,117 @@
+* {
+  box-sizing: border-box
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Kosugi Maru', sans-serif;    
+    font-weight: 400;
+    font-style: normal;
+    color: #000;
+    background-color: #fff; 
+  }
+
+  h1{
+    font-size: 2rem;
+    margin-top: 20px;
+  }
+
+  header {
+    position: absolute;
+    width: 100%;
+    height: 75px;
+    background-color: rgba(255,255,255,.8);
+    border-bottom: 5px solid #000;
+    display: grid;
+    grid-template-columns: auto auto;
+    overflow: hidden;
+  }
+
+  .logo {
+    /* width: 50%; */
+    height: 100%;
+    padding: 0 30px;
+    text-align: center;
+    border-right: 5px solid #000;
+  }
+
+  #reset-btn {    
+    /* width: 50%; */
+    height: 75px;
+    color: #fff;
+    background-color: #F7004B;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border: none;
+  }
+
+  #reset-btn:hover {
+    background-color: #D927CD;
+  }
+
+  .modal {
+    width: 500px;
+    height: 250px;
+    padding: 20px 50px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border: 5px solid #000;
+    z-index: 5;
+    text-align: center;
+    display: none;
+  }
+  
+  #timer {
+    width: 100%;
+    font-size: 2rem;
+    margin: 20px 0 0;
+  }
+
+  #winner {
+    width: 100%;
+    font-size: 2rem;
+    margin: 20px 0 0;
+  }
+
+  .grid {
+    width: calc(100vw - 40px);
+    max-width: 1600px;
+    height: calc(100vh - 40px);
+    display: grid;
+    grid-template-columns: 33.33% 33.33% 33.33%;
+    grid-template-rows: 33.33% 33.33% 33.33%;
+    grid-gap: 20px;
+    padding: 90px 20px 20px;
+  }
+  
+  .cell {
+    text-align: center;
+    background-color: #5218FA;
+    cursor: pointer;
+    padding-bottom: 25%;
+  }
+  
+  .cell:hover {
+    background-color: #957BE0!important;
+  }
+  
+  
+  .cell-plcr {
+    font-size: 4em;    
+    position: relative;
+    top: 50%;
+    margin-top: -.5em;
+  }
+  
+  .cell-img {
+    font-size: 4em;    
+    position: relative;
+    top: 50%;
+    margin-top: -.5em;
+    display:none;
+  }
+  
