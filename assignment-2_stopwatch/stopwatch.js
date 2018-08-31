@@ -5,15 +5,12 @@ const resetBtn = document.querySelector('#reset');
 const recordBtn = document.querySelector('#record');
 const recordItm = document.querySelector('#recorded-times');
 const elapsedTime = document.querySelector('#elapsed-time');
-
 let miliseconds = 00;
 let seconds = 00;
 let minutes = 00;
 let hours = 00;
-
 let interval = null;
 let timerActive = false;
-
 let recordedTimes = [];
 
 /* Event Listeners */
@@ -87,7 +84,6 @@ const restartTimer = () => {
 
 const recordTime = () => {
   recordedTimes.push(`${hours} : ${minutes} : ${seconds} : ${miliseconds}`)
-  console.log(recordedTimes)
   recordItm.insertAdjacentHTML(
     "afterbegin",
     `<li class="recorded-time">${hours} : ${minutes} : ${seconds} : ${miliseconds}</li>`
