@@ -8,6 +8,57 @@ let promise3 = api.searchProductsByPrice(200, 25);
 let promise4 = api.searchProductsByType('Book');
 
 
+const processSearch = (searchId, searchType, searchPrice) => {
+  if (searchId) {
+    api.searchProductById(searchId).then(val => {
+      return Promise.all([api.searchProductsByPrice(val.price, 50), api.searchProductsByType(val.type), val]);
+    }).then(val => {
+      let similarArray = getIntersection(val[0], val[1], val[2], val[3], val[4], val[2].id);
+      updateExaminedText(val[2]);
+      updateTable('similarTable', similarArray);
+    }).catch(val => {
+      alert(val);
+    });
+  } else if (searchType) {
+    api.searchProductsByType(searchType).then(val => {
+      let typeId = Object.values(val[0]);
+      processSearch(typeId[0])
+    }).catch(val => {
+      alert(val);
+    });
+  } else if (searchPrice) {
+    api.searchProductsByPrice(searchPrice, 50).then(val => {
+      let typeId = Object.values(val[0]);
+      processSearch(typeId[0])
+    }).catch(val => {
+      alert(val);
+    });
+  }
+};
+
+const getIntersection = (arrA, arrB, searchedId) => {
+  let samePrice = arrA;
+  let sameType = arrB;
+  let similarArray = [];
+  samePrice.forEach(function (obj1) {
+    sameType.forEach(function (obj2) {
+      if (obj1.id == obj2.id && obj1.id != searchedId)
+        similarArray.push(obj1);
+    });
+  });
+  return similarArray;
+};
+
+/* Update returned info */
+const updateExaminedText = product => {
+  let outputString = "Product Id: " + product.id;
+
+  outputString += "<br> Price: " + product.price;
+  outputString += "<br> Type: " + product.type;
+  document.querySelector("#productText").innerHTML = outputString;
+};
+
+
 const createTableHeader = (tableId) => {
   let tableHeaderRow = document.createElement('TR');
   let th1 = document.createElement('TH');
@@ -44,8 +95,9 @@ const updateTable = (tableId, productArray) => {
     let td4 = document.createElement('button');
 
     td4.addEventListener('click', function () {
-
+      processSearch(this.parentNode.firstChild.innerHTML);
     });
+
     td1.appendChild(document.createTextNode(productArray[i].id));
     td2.appendChild(document.createTextNode(productArray[i].type));
     td3.appendChild(document.createTextNode(productArray[i].price));
@@ -58,90 +110,28 @@ const updateTable = (tableId, productArray) => {
   }
 };
 
-/* Update returned info */
-const updateExaminedText = product => {
-  let outputString = "Product Id: " + product.id;
-
-  outputString += "<br> Price: " + product.price;
-  outputString += "<br> Type: " + product.type;
-  document.querySelector("#productText").innerHTML = outputString;
-};
-
-const getIntersection = (arrA, arrB, searchedId) => {
-  let samePrice = arrA;
-  let sameType = arrB;
-  let similarArray = [];
-  samePrice.forEach(function (obj1) {
-    sameType.forEach(function (obj2) {
-      if (obj1.id == obj2.id && obj1.id != searchedId)
-        similarArray.push(obj1);
-    });
-  });
-  return similarArray;
-};
-
-const processSearch = (searchId, searchType, searchPrice) => {
-  console.log(searchId, searchType, searchPrice)
-  if (searchId) {
-    console.log(`searchId is ${searchId}`);
-    api.searchProductById(searchId).then(val => {
-      return Promise.all([api.searchProductsByPrice(val.price, 50), api.searchProductsByType(val.type), val]);
-    }).then(val => {
-      let similarArray = getIntersection(val[0], val[1], val[2].id);
-      updateExaminedText(val[2]);
-      updateTable('similarTable', similarArray);
-    }).catch(val => {
-      alert(val);
-    });
-  } else if (searchType) {
-    console.log(`searchType is ${searchType}`);
-    api.searchProductsByType(searchType).then(val => {
-      let typeId = Object.values(val[0]);
-      processSearch(typeId[0])
-    }).catch(val => {
-      alert(val);
-    });
-
-  } else if (searchPrice) {
-    console.log(`searchPrice is ${searchPrice}`);
-    api.searchProductsByPrice(searchPrice).then(val => {
-      let typeId = Object.values(val[0]);
-      processSearch(typeId[0])
-    }).catch(val => {
-      alert(val);
-    });
-  }
-};
-
-// const processSearchType = searchType => {
-//   api.searchProductsByType(searchType).then(val => {
-//     let typeId = Object.values(val[0]);
-//     processSearch(typeId[0])
-//   }).catch(val => {
-//     alert(val);
-//   });
-// };
-
 /* We will use the library's api.searchAllProducts() method call to get a Promise containing an array of all of the products in the catalog. We will then use the updateTable(tableId,productArray) method to populate the "List of All Products" table with the array of catalog products. */
 
 api.searchAllProducts().then(function (value) {
   updateTable('allTable', value);
 });
 
-
 /* Event Handlers */
 document.querySelector("#idInputButton").addEventListener('click', function () {
   let id = document.querySelector('#idInput').value
-  processSearch(id, undefined, undefined);
+  let idUpper = id.charAt(0).toUpperCase() + id.substr(1);
+
+  processSearch(idUpper, undefined, undefined);
 });
 
 document.querySelector("#typeInputButton").addEventListener('click', function () {
   let type = document.querySelector('#typeInput').value;
-  processSearch(undefined, type, undefined);
+  let typeUpper = type.charAt(0).toUpperCase() + type.substr(1);
+  processSearch(undefined, typeUpper, undefined);
 });
-
 
 document.querySelector("#priceInputButton").addEventListener('click', function () {
   let price = document.querySelector('#priceInput').value;
-  processSearch(undefined, undefined, price);
+  let priceUpper = price.charAt(0).toUpperCase() + price.substr(1);
+  processSearch(undefined, undefined, priceUpper);
 });

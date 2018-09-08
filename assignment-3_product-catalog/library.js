@@ -59,7 +59,7 @@
                         i++;
                     }
                     reject(`Invalid ID: ${id}`)
-                }, 1000);
+                }, 100);
             });
             return promise;
         };
@@ -73,10 +73,8 @@
                 let possibleTypes = ['Electronics', 'Book', 'Clothing', 'Food'];
                 let stringifiedArray;
                 if (!possibleTypes.includes(type)) {
-                    console.log('ugh')
                     reject(`Invalid type: ${type}`)
                 } else {
-                    console.log('rolling...')
                     setTimeout(() => {
                         while (i < catalog.length) {
                             if (catalog[i].type == type) {
@@ -89,20 +87,18 @@
                             i++;
                         }
                         resolve(typeArray);
-                    }, 1000);
+                    }, 100);
                 }
             });
             return promise;
         };
 
-        /* Lets create a function that will return a Promise containing an array of all the products that were witht the specified difference of the specified price. Promise will reject if invalid price is searched */
+        /* Lets create a function that will return a Promise containing an array of all the products that were within the specified difference of the specified price. Promise will reject if invalid price is searched */
 
         const searchProductsByPrice = (price, difference) => {
-            console.log(price, difference)
             let promise = new Promise((resolve, reject) => {
                 let i = 0;
                 let priceArray = [];
-
                 if (!isFinite(price)) {
                     reject(`Invalid price: ${price}`)
                 } else {
@@ -118,7 +114,7 @@
                             i++;
                         }
                         resolve(priceArray);
-                    }, 1000);
+                    }, 100);
                 }
             });
             return promise;
