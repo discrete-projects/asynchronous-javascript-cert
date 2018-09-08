@@ -3,51 +3,66 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>StopWatch</title>
+  <title>Catalog Explorer</title>
   <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
   <link rel="stylesheet" href="style.css" type="text/css">
-  <script src="library.js"></script> 
+  <script src="library.js"></script>
 </head>
+
 <body>
-    <div>
-        <h3>Search Product by Id</h3>
-        <input id="input">
-        <button id="inputButton" >Search Product</button>
+  <div class="container">
+    <div class="container-item">
+      <h3>Search Product by Id</h3>
+      <input id="idInput">
+      <button id="idInputButton">Search Product</button>
     </div>
 
+    <div class="container-item">
+      <h3>Search Product by Type</h3>
+      <input id="typeInput">
+      <button id="typeInputButton">Search Type</button>
+    </div>
 
-    <div >
-        <h3>Examined Product</h3>
-        <p id="productText">Product Id: <br>Price: <br>Type: </p>
+    <div class="container-item">
+      <h3>Search Product by Price</h3>
+      <input id="priceInput">
+      <button id="priceInputButton">Search Price</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="container-item">
+      <h3>Examined Product</h3>
+      <p id="productText">Product Id: <br>Price: <br>Type: </p>
+    </div>
+
+    <div class="container-item">
         <h3>List of Similar Products</h3>
 
-        <table id="similarTable" width="300px" border="1" >
+      <table id="similarTable" width="300px" border="1">
         <tr>
-            <th>ProductId</th>
-            <th>Type</th> 
-            <th>Price</th>
-            <th>Examine</th>
+          <th>ProductId</th>
+          <th>Type</th>
+          <th>Price</th>
+          <th>Examine</th>
         </tr>
-
-        </table>
-
+      </table>
     </div>
 
-    <div >
-    <h3>List of All Products</h3>
-    <table id="allTable" width="300px" border="1" >
+    <div class="container-item">
+      <h3>List of All Products</h3>
+      <table id="allTable" width="300px" border="1">
         <tr>
-            <th>ProductId</th>
-            <th>Type</th> 
-            <th>Price</th>
-            <th>Examine</th>
+          <th>ProductId</th>
+          <th>Type</th>
+          <th>Price</th>
+          <th>Examine</th>
         </tr>
-
-    </table>
+      </table>
     </div>
+  </div>
 
-
-<script src="productCatalog.js"></script> 
+  <script src="productCatalog.js"></script>
 </body>
 
 </html>

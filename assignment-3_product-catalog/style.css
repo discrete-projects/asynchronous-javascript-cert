@@ -34,20 +34,28 @@ body {
 
   .container {
     display: grid;
-    width: 310px;
+    width: 100%;
+    max-width: 1200px;
+    height: auto;
+    margin: 20px auto;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 20px;
+    padding: 20 20px;
+  }
+
+  .results-container {
+    display: grid;
+    width: 100%;
+    max-width: 1200px;
     height: 640px;
     margin: 20px auto;
     display: grid;
-    grid-template-columns: 100%;
+    grid-template-columns: auto auto auto;
     grid-template-rows: 100px 100px 25px auto 125px;
     grid-gap: 20px;
     padding: 20 20px;
-    border: 15px solid var(--brdr-txt-color);;
-    border-radius: 65px;
-    overflow: hidden;
-    background-color: var(--offwhite-color);
   }
-
 
 
 
